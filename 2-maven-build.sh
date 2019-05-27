@@ -4,6 +4,13 @@ if [ -z "$JENKINS_URL" ]; then
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
 
+if [ -f "/sys/fs/cgroup/memory/memory.limit_in_bytes" ]; then
+  # Running in container; unlimited memory is reported with value 9223372036854771712
+  if [ $(cat /sys/fs/cgroup/memory/memory.limit_in_bytes) -lt 9223372036854771712 ]; then
+    export MAVEN_OPTS="-XX:MaxRAM=$(( $(cat /sys/fs/cgroup/memory/memory.limit_in_bytes) / 70 * 100))"
+  fi
+fi
+
 mvn \
   -f releng \
   --batch-mode \
