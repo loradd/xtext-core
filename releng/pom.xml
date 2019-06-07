@@ -12,7 +12,7 @@
 		<tycho-version>1.4.0</tycho-version>
 		<root-dir>${basedir}/..</root-dir>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>cd_MWE211Snapshot</upstreamBranch>
 	</properties>
 
 	<repositories>
@@ -27,6 +27,10 @@
 		<repository>
 			<id>lib</id>
 			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository</url>
+		</repository>
+		<repository>
+			<id>mwe-snaps</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/mwe/job/master/lastSuccessfulBuild/artifact/build/maven-repo/</url>
 		</repository>
 	</repositories>
 
